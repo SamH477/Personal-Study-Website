@@ -1,0 +1,44 @@
+{% extends "homepage.html" %}
+
+{% block title %}PDF Upload{% endblock %}
+
+{% block content %}
+<div class="upload-container">
+    <h2>Upload a PDF file to get started!</h2>
+    <form action="/upload" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+        <input type="file" id="fileInput" name="file" accept=".pdf">
+        <button type="submit">Upload</button>
+    </form>
+</div>
+<div id="errorContainer" style="display: none;">
+    <p id="errorMessage" style="color: red;">Error: Please Select a PDF File!</p>
+</div>
+
+<script>
+function validateForm() {
+    var fileInput = document.getElementById('fileInput');
+    var errorContainer = document.getElementById('errorContainer');
+    var errorMessage = document.getElementById('errorMessage');
+    
+    if (fileInput.files.length === 0) {
+        errorContainer.style.display = 'block';
+        errorMessage.innerText = 'Error: Please Select a PDF File!';
+        return false;
+    }
+    return true;
+}
+</script>
+<style>
+    #errorContainer {
+        background-color: #ffebee; /* Light red background color */
+        border: 1px solid #ffcdd2; /* Light red border */
+        padding: 10px; /* Add padding */
+        margin-top: 10px; /* Add some space between the upload container and the error message */
+    }
+    
+    #errorMessage {
+        color: #d32f2f; /* Red text color */
+        margin: 0; /* Remove default margin */
+    }
+    </style>
+{% endblock %}

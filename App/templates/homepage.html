@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Study Website{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .navbar {
+            background-color: #333;
+            padding: 20px 0;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+            letter-spacing: 2px;
+        }
+        .navbar-links {
+            display: flex;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .navbar a:hover {
+            color: #ffd700; /* Change color on hover */
+        }
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 100px); /* Subtract navbar height */
+        }
+        h2 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Study Website</h1>
+        <div class="navbar-links">
+            <a href="/">Home</a>
+            <a href="/pdf_upload">PDF Upload</a>
+            <a href="/my_flashcards">My Flashcards</a>
+        </div>
+    </div>
+    <div class="content">
+        {% block content %}<h2>Welcome to our Study Website!</h2>{% endblock %}
+    </div>
+</body>
+</html>
