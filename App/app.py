@@ -1,3 +1,5 @@
+from openai import OpenAI
+from api_config import OPENAI_API_KEY
 from flask import Flask, render_template, request
 from PyPDF2 import PdfReader
 
