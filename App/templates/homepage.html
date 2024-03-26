@@ -11,6 +11,7 @@
             padding: 0;
             background-color: #f0f0f0;
         }
+
         .navbar {
             background-color: rgba(0,75,152,255);
             padding: 20px 0;
@@ -19,14 +20,17 @@
             justify-content: space-between;
             align-items: center;
         }
+
         .navbar h1 {
             margin: 0;
             font-size: 24px;
             letter-spacing: 2px;
         }
+
         .navbar-links {
             display: flex;
         }
+
         .navbar a {
             color: #fff;
             text-decoration: none;
@@ -34,23 +38,40 @@
             font-size: 16px;
             transition: all 0.3s ease;
         }
+
         .navbar a:hover {
             color: #ffd700; /* Change color on hover */
         }
+
         .content {
             display: flex;
             justify-content: center;
             align-items: center;
             height: calc(100vh - 100px); /* Subtract navbar height */
+            flex-direction: column; /* Added to align items vertically */
         }
+
         h2 {
             color: #333;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* Added for demonstration */
+            gap: 10px; /* Added gap between grid items */
+            margin-top: 20px; /* Added margin to separate from content */
+        }
+
+        .grid-item {
+            background-color: #ccc; /* Added background color for demonstration */
+            padding: 100px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="navbar">
-        <h1>Study Website</h1>
+        <h1 style="margin-left: 15px;">Study Website</h1>
         <div class="navbar-links">
             <a href="/">Home</a>
             <a href="/pdf_upload">PDF Upload</a>
@@ -59,6 +80,24 @@
     </div>
     <div class="content">
         {% block content %}<h2>Welcome to our Study Website!</h2>{% endblock %}
+
+        <div class="grid-container">
+            <div class="grid-item">1</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">4</div>
+            <div class="grid-item">5</div>
+            <div class="grid-item">6</div>
+            <div class="grid-item">7</div>
+            <div class="grid-item">8</div>
+            <div class="grid-item">9</div>
+            <div class="grid-item">11</div>
+            <div class="grid-item">12</div>
+            <div class="grid-item">13</div>
+            <div class="grid-item">14</div>
+            <div class="grid-item">15</div>
+            <div class="grid-item">16</div>
+          </div>
     </div>
 </body>
 </html>
