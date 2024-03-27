@@ -3,6 +3,63 @@
 {% block title %}PDF Processing{% endblock %}
 
 {% block content %}
-<h2>Your PDF:</h2>
-<p>{{ text }}</p>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards</title>
+    <style>
+        .flashcard {
+            width: 300px;
+            height: 200px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            display: inline-block;
+            font-weight: bold;
+        }
+        .flashcard:hover {
+            transform: scale(1.05);
+        }
+        .flashcard .term,
+        .flashcard .definition {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50%;
+            text-align: center;
+            font-size: 20px;
+        }
+        .flashcard .definition {
+            display: none;
+        }
+        .flashcard.flip .term {
+            display: none;
+        }
+        .flashcard.flip .definition {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    {% for t in terms %}
+        {% set term_definition = t.split('-') %}
+        <div class="flashcard" onclick="this.classList.toggle('flip')">
+            <div class="content term">
+                <p>{{ term_definition[0] }}</p>
+            </div>
+            <div class="content definition">
+                <p>{{ term_definition[1] }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</body>
+</html>
+
 {% endblock %}

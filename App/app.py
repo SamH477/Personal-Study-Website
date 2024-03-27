@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request
+from openai import OpenAI
+from api_config.api_config import OPENAI_API_KEY
 from PyPDF2 import PdfReader
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 # Create a Flask app
 app = Flask(__name__)
@@ -21,8 +24,21 @@ def process_pdf():
     reader = PdfReader(pdf_file)
     page = reader.pages[0]
     text = page.extract_text()
-    
-    return render_template('process_pdf.html', text=text)
+
+    # Generate Flashcards for Study Guide Terms using AI
+    completion = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+    {"role": "system", "content": text},
+    {"role": "user", "content": "Generate definitions for each term from this study guide in this format: term1-definition. term2-definition. etc"}
+    ])
+
+    response = str(completion.choices[0].message)
+
+    terms_list = response.split(sep = '.')
+    print(response)
+
+    return render_template('process_pdf.html', text=text, terms=terms_list)
 
 # Define a route so users can see their flashcards
 @app.route('/my_flashcards')
