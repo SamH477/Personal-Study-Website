@@ -60,6 +60,7 @@
             grid-template-columns: repeat(5, 1fr); /* Added for demonstration */
             gap: 10px; /* Added gap between grid items */
             margin-top: 20px; /* Added margin to separate from content */
+            padding: 20px; /* Add padding to create space around grid items */
         }
 
         .grid-item {
@@ -82,21 +83,48 @@
         {% block content %}<h2>Welcome to our Study Website!</h2>
 
         <div class="grid-container">
-            <div class="grid-item">1</div>
-            <div class="grid-item">2</div>
-            <div class="grid-item">3</div>
-            <div class="grid-item">4</div>
-            <div class="grid-item">5</div>
-            <div class="grid-item">6</div>
-            <div class="grid-item">7</div>
-            <div class="grid-item">8</div>
-            <div class="grid-item">9</div>
-            <div class="grid-item">11</div>
-            <div class="grid-item">12</div>
-            <div class="grid-item">13</div>
-            <div class="grid-item">14</div>
-            <div class="grid-item">15</div>
-            <div class="grid-item">16</div>
+            <div class="grid-item">
+                <img src="/App/templates/images/khan_academy.png">
+                <h1 style="font-size:11px">Khan Academy </h1>
+            </div>
+            <div class="grid-item">
+                <img src="/App/templates/images/w3schools.png">
+                <h1 style="font-size:11px">W3Schools </h1>
+            </div>
+            <div class="grid-item">
+                <img src="/App/templates/images/code.png">
+                <h1>
+                    <a href="https://huggingface.co/models" style="font-size:11px">Open Source Codes</a>
+                </h1>                
+            </div>
+            <div class="grid-item">
+                <!-- <img src="/App/templates/images/w3schools.png"> -->
+                <h1 style="font-size:11px">Textbook Solutions </h1>
+            </div>
+            <div class="grid-item">
+                <!-- <img src="/App/templates/images/w3schools.png"> -->
+                <h1 style="font-size:11px">Wolframalpha </h1>
+            </div>
+            <div class="grid-item">
+                <!-- <img src="/App/templates/images/w3schools.png"> -->
+                <h1 style="font-size:11px">Quizlet </h1>
+            </div>
+            <div class="grid-item">
+                <!-- <img src="/App/templates/images/w3schools.png"> -->
+                <h1 style="font-size:11px">PDF2Anki (Free "Quizlet") </h1>
+            </div>
+            <div class="grid-item">
+                <!-- <img src="/App/templates/images/w3schools.png"> -->
+                <h1 style="font-size:11px">Homeworkify (Free "Chegg") </h1>
+            </div>
+            <div class="grid-item">
+                 <!-- <img src="/App/templates/images/w3schools.png"> -->
+                 <h1 style="font-size:11px">Knowt (Free "Quizlet") </h1>
+            </div>
+            <div class="grid-item">
+                <!-- <img src="/App/templates/images/w3schools.png"> -->
+                <h1 style="font-size:11px">Study Fetch </h1>
+            </div>
           </div>
           {% endblock %}
     </div>
