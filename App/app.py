@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from openai import OpenAI
 from api_config.api_config import OPENAI_API_KEY
 from PyPDF2 import PdfReader
+import re
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 # Create a Flask app
@@ -30,13 +31,22 @@ def process_pdf():
     model="gpt-3.5-turbo",
     messages=[
     {"role": "system", "content": text},
-    {"role": "user", "content": "Generate definitions for each term from this study guide in this format: term1-definition. term2-definition. etc"}
+    {"role": "user", "content": "Generate one sentence definitions for each term from this study guide in this format: term1:definition term2:definition etc. Make sure that each term and its corresponding definition is seperated by a colon."}
     ])
 
     response = str(completion.choices[0].message)
 
-    terms_list = response.split(sep = '.')
-    print(response)
+    response = response.replace("', role='assistant', function_call=None, tool_calls=None)", ' ')
+
+    response = response.replace("\\n", ' ')
+
+    response = response.replace("ChatCompletionMessage(content='", ' ')
+
+    terms_list = response.split(sep = "  ")
+
+    del terms_list[-1]
+
+    print(terms_list)
 
     return render_template('process_pdf.html', text=text, terms=terms_list)
 

@@ -18,7 +18,8 @@
             border: 1px solid #ccc;
             border-radius: 10px;
             padding: 20px;
-            margin: 20px;
+            margin: 20px auto; 
+            margin-top: 100px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
             display: inline-block;
@@ -49,7 +50,7 @@
 </head>
 <body>
     {% for t in terms %}
-        {% set term_definition = t.split('-') %}
+        {% set term_definition = t.split(':') %}
         <div class="flashcard" onclick="this.classList.toggle('flip')">
             <div class="content term">
                 <p>{{ term_definition[0] }}</p>
