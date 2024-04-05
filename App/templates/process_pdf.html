@@ -11,23 +11,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flashcards</title>
     <style>
+        .flashcard-container {
+            height: 700px; /* Adjust the height as needed */
+            width: 600px;
+            overflow: auto; /* Add a scrollbar when flashcards overflow */
+            display: flex;
+            flex-direction: column; /* Display flashcards vertically */
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px; /* Adjust the margin as needed */
+        }
+
         .flashcard {
             width: 300px;
             height: 200px;
             background-color: #f0f0f0;
             border: 1px solid #ccc;
             border-radius: 10px;
-            padding: 20px;
-            margin: 20px auto; 
-            margin-top: 100px;
+            padding: 50px;
+            margin: 10px auto; 
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
-            display: inline-block;
             font-weight: bold;
         }
+
         .flashcard:hover {
             transform: scale(1.05);
         }
+
         .flashcard .term,
         .flashcard .definition {
             display: flex;
@@ -37,29 +48,59 @@
             text-align: center;
             font-size: 20px;
         }
+
         .flashcard .definition {
             display: none;
         }
+
         .flashcard.flip .term {
             display: none;
         }
+
         .flashcard.flip .definition {
             display: flex;
+        }
+        .save-button button {
+            color: white;
+            background-color: rgba(0,75,152,255); /* Change the background color */
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .save-button button:hover {
+            color: #ffd700;
         }
     </style>
 </head>
 <body>
-    {% for t in terms %}
-        {% set term_definition = t.split(':') %}
-        <div class="flashcard" onclick="this.classList.toggle('flip')">
-            <div class="content term">
-                <p>{{ term_definition[0] }}</p>
+    <div class="save-button">
+        <button onclick="saveFlashcards()">Save Flashcards</button>
+    </div>
+    <div class="flashcard-container">
+        {% for t in terms %}
+            {% set term_definition = t.split(':') %}
+            <div class="flashcard" onclick="this.classList.toggle('flip')">
+                <div class="content term">
+                    <p>{{ term_definition[0] }}</p>
+                </div>
+                <div class="content definition">
+                    <p>{{ term_definition[1] }}</p>
+                </div>
             </div>
-            <div class="content definition">
-                <p>{{ term_definition[1] }}</p>
-            </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
+    <script>
+        function saveFlashcards() {
+            // Logic to save flashcards and generate link
+            // Example:
+            var flashcardsData = "flashcard1:definition1|flashcard2:definition2|flashcard3:definition3"; // Example flashcard data
+            var link = "https://example.com/my_flashcards?data=" + encodeURIComponent(flashcardsData);
+            alert("Flashcards saved! Link: " + link);
+        }
+        </script>
 </body>
 </html>
 
