@@ -18,6 +18,16 @@ def homepage():
     return render_template('homepage.html')
 
 # Define a route for uploading a pdf file
+@app.route('/aisites')
+def aisites():
+    return render_template('aisites.html')
+
+# Define a route for uploading a pdf file
+@app.route('/youtube')
+def youtube():
+    return render_template('youtube.html')
+
+# Define a route for uploading a pdf file
 @app.route('/pdf_upload')
 def pdf_upload():
     return render_template('pdf_upload.html')

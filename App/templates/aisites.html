@@ -1,9 +1,16 @@
+{% extends "homepage.html" %}
+
+{% block title %}AI Sites{% endblock %}
+
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Study Website{% endblock %}</title>
+    <title>AI Sites</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,43 +20,8 @@
             overflow-y: auto;
         }
 
-        .navbar {
-            background-color: rgba(0,75,152,255);
-            padding: 20px 0;
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            position: fixed;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .navbar h1 {
-            margin: 0;
-            font-size: 24px;
-            letter-spacing: 2px;
-        }
-
-        .navbar-links {
-            display: flex;
-        }
-
-        .navbar a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 20px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .navbar a:hover {
-            color: #ffd700;
-        }
-
         .content {
-            margin-top: 50px;
+            margin-top: 20px;
             padding: 20px;
         }
 
@@ -60,7 +32,7 @@
         .grid-container {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            grid-template-rows: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 1fr);
             gap: 10px;
             margin-top: 20px;
             margin-bottom: 20px;
@@ -112,20 +84,8 @@
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <h1 style="margin-left: 15px;">Study Website</h1>
-        <div class="navbar-links">
-            <a href="/">Home</a>
-            <a href="/aisites">AI Sites</a>
-            <a href="/my_flashcards">My Flashcards</a>
-            <a href="/pdf_upload">PDF Upload</a>
-            <a href="/video_upload"> Video Upload</a>
-            <a href="/youtube">Youtubers</a>
-        </div>
-    </div>
     <div class="content">
-        {% block content %}
-        <center> <h2>Welcome to our Study Website!</h2> </center>
+        <center> <h2>AI Sources</h2> </center>
 
         <div class="grid-container">
             <div class="grid-item">
@@ -198,11 +158,26 @@
                 </div>
             </div>
 
-        <!-- desmos, grammarly, chegg, nih.gov, google scholar, chatgpt, course hero, wileyplus, numerade, 
+            <div class="grid-item">
+                <a href="https://www.desmos.com/"> <img src="{{ url_for('static', filename='desmos.png') }}" alt="Desmos" class="image"> </a>
+                <div class="hover-img">
+                    <a href="https://www.desmos.com/" style="text-decoration: none; color: inherit;"> <div class="text">Desmos</div> </a>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <a href="https://www.grammarly.com/"> <img src="{{ url_for('static', filename='grammarly.png') }}" alt="Grammarly" class="image"> </a>
+                <div class="hover-img">
+                    <a href="https://www.grammarly.com/" style="text-decoration: none; color: inherit;"> <div class="text">Grammarly</div> </a>
+                </div>
+            </div>
+
+        <!-- chatgpt, chegg, google scholar, course hero, wileyplus, numerade, 
             brainly, socratic, photomath, homework study, bartleby, quilt, zotero, notability, easy bib, stack exchange, 
             Canva, Google Suite, Mathways, Symbolab, Quora, Claude, Google/Microsoft products, chatgpt, wikipedia
             AI Slides, Geogebra, Google Geminini, Github, Leetcode, Geeks for Geeks, Brainly-->
         {% endblock %}
+        </div>
     </div>
 </body>
 </html>
