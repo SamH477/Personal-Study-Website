@@ -32,7 +32,7 @@
         .grid-container {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            grid-template-rows: repeat(3, 1fr);
+            grid-template-rows: repeat(4, 1fr);
             gap: 10px;
             margin-top: 20px;
             margin-bottom: 20px;
@@ -46,6 +46,7 @@
             position: relative;
             width: 100%;
             height: 100%;
+            overflow: hidden;
         }
 
         .image {
@@ -78,7 +79,7 @@
         .text {
             background-color: #04AA6D;
             color: white;
-            font-size: 16px;
+            font-size: auto;
             padding: 16px 32px;
         }
     </style>
@@ -172,8 +173,49 @@
                 </div>
             </div>
 
-        <!-- chatgpt, chegg, google scholar, course hero, wileyplus, numerade, 
-            brainly, socratic, photomath, homework study, bartleby, quilt, zotero, notability, easy bib, stack exchange, 
+            <div class="grid-item">
+                <a href="https://chat.openai.com/"> <img src="{{ url_for('static', filename='chatgpt.png') }}" alt="ChatGPT" class="image"> </a>
+                <div class="hover-img">
+                    <a href="https://chat.openai.com/" style="text-decoration: none; color: inherit;"> <div class="text">ChatGPT</div> </a>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <a href="https://www.chegg.com/"> <img src="{{ url_for('static', filename='chegg.jpeg') }}" alt="Chegg" class="image"> </a>
+                <div class="hover-img">
+                    <a href="https://www.chegg.com/" style="text-decoration: none; color: inherit;"> <div class="text">Chegg</div> </a>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <a href="https://scholar.google.com/"> <img src="{{ url_for('static', filename='googlescholar.png') }}" alt="Google Scholar" class="image"> </a>
+                <div class="hover-img">
+                    <a href="https://scholar.google.com/" style="text-decoration: none; color: inherit;"> <div class="text">Google Scholar</div> </a>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <a href="https://www.coursehero.com/"> <img src="{{ url_for('static', filename='coursehero.png') }}" alt="Course Hero" class="image"> </a>
+                <div class="hover-img">
+                    <a href="https://www.coursehero.com/" style="text-decoration: none; color: inherit;"> <div class="text">Course Hero</div> </a>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <a href="https://www.numerade.com/"> <img src="{{ url_for('static', filename='numerade.jpeg') }}" alt="Numerade" class="image"> </a>
+                <div class="hover-img">
+                    <a href="https://www.numerade.com/" style="text-decoration: none; color: inherit;"> <div class="text">Numerade</div> </a>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <a href="https://brainly.com/"> <img src="{{ url_for('static', filename='brainly.png') }}" alt="Brainly" class="image"> </a>
+                <div class="hover-img">
+                    <a href="https://brainly.com/" style="text-decoration: none; color: inherit;"> <div class="text">Brainly</div> </a>
+                </div>
+            </div>
+
+        <!-- socratic, homework study, bartleby, quilt, zotero, notability, easy bib, stack exchange, 
             Canva, Google Suite, Mathways, Symbolab, Quora, Claude, Google/Microsoft products, chatgpt, wikipedia
             AI Slides, Geogebra, Google Geminini, Github, Leetcode, Geeks for Geeks, Brainly-->
         {% endblock %}
