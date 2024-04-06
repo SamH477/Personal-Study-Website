@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Study Website{% endblock %}</title>
+    <title>{% block title %}Cram Review{% endblock %}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -48,9 +48,61 @@
             color: #ffd700;
         }
 
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+        }
+
+        .footer-section p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-section {
+                flex: 1 100%;
+                padding: 0 10px;
+            }
+        }
+
         .content {
             margin-top: 50px;
             padding: 20px;
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 10px;
         }
 
         h2 {
@@ -109,23 +161,33 @@
             font-size: 16px;
             padding: 16px 32px;
         }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        li {
+            text-align: left;
+            margin-bottom: 8px;
+        }
+
     </style>
 </head>
 <body>
     <div class="navbar">
-        <h1 style="margin-left: 15px;">Study Website</h1>
+        <h1 style="margin-left: 15px;">Cram Review</h1>
         <div class="navbar-links">
             <a href="/">Home</a>
             <a href="/aisites">AI Sites</a>
             <a href="/my_flashcards">My Flashcards</a>
             <a href="/pdf_upload">PDF Upload</a>
             <a href="/video_upload"> Video Upload</a>
-            <a href="/youtube">Youtubers</a>
         </div>
     </div>
     <div class="content">
         {% block content %}
-        <center> <h2>Welcome to our Study Website!</h2> </center>
+        <center> <h2>Welcome to our Study Website, Cram Review!</h2> </center>
 
         <div class="grid-container">
             <div class="grid-item">
@@ -198,11 +260,46 @@
                 </div>
             </div>
 
-        <!-- desmos, grammarly, chegg, nih.gov, google scholar, chatgpt, course hero, wileyplus, numerade, 
-            brainly, socratic, photomath, homework study, bartleby, quilt, zotero, notability, easy bib, stack exchange, 
-            Canva, Google Suite, Mathways, Symbolab, Quora, Claude, Google/Microsoft products, chatgpt, wikipedia
-            AI Slides, Geogebra, Google Geminini, Github, Leetcode, Geeks for Geeks, Brainly-->
+            <a href="/aisites">Click Here for More AI Sites!!!</a>
+
         {% endblock %}
     </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p> Welcome to Cram Review! We are Sam and Matt, dedicated to bridging a crucial gap in learning. Our mission is 
+                    to empower users by offering a comprehensive platform that seamlessly transforms PDFs, videos, and other content 
+                    into interactive flashcards. </p>
+                <br>
+                    
+                <p> Recognizing the growing importance of artificial intelligence (AI) in education, we 
+                    saw an opportunity to enhance the learning experience with our innovative product, Cram Review. Our platform not 
+                    only facilitates flashcard creation but also integrates cutting-edge AI resources, augmenting the learning journey 
+                    beyond conventional methods. </p>
+                <br>    
+                <p> At Cram Review, we are committed to facilitating effective, personalized learning through technology. 
+                    Join us as we redefine the way knowledge is accessed and retained. </p>
+
+            </div>
+            <div class="footer-section">
+                <h3>Updates</h3>
+                <ul>
+                    <li>Site officially launches on 04/04/2024  </li>
+                    <li>Expansion of website started on 04/05/2024</li>
+                </ul>
+
+                <img src="{{ url_for('static', filename='brainfoot.jpeg') }}" alt="Study Fetch" class="image">
+            </div>
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <p>1 Alpha Drive, Elizabethtown, United States</p>
+                <p>Email: huhns@etown.edu</p>
+                <p>Phone: +123 456 7890</p>
+            </div>
+        </div>
+        <p>&copy; 2024 Cram-Review-Productions. All rights reserved.</p>
+    </footer>
 </body>
 </html>

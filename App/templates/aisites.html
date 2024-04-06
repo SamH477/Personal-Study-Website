@@ -1,225 +1,685 @@
 {% extends "homepage.html" %}
 
-{% block title %}AI Sites{% endblock %}
-
 {% block content %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Sites</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+        overflow-y: auto;
+    }
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-            overflow-y: auto;
-        }
+    .content {
+        margin-top: 20px;
+        padding: 20px;
+    }
 
-        .content {
-            margin-top: 20px;
-            padding: 20px;
-        }
+    h2 {
+        color: #333;
+    }
 
-        h2 {
-            color: #333;
-        }
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 20px;
+    }
 
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            grid-template-rows: repeat(4, 1fr);
-            gap: 10px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            padding: 20px;
-        }
+    .grid-item {
+        background-color: #ffffff;
+        text-align: center;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        flex: 1 0 200px;
+        max-width: 300px;
+        box-sizing: border-box;
+        position: relative;
+        overflow: hidden;
+    }
 
-        .grid-item {
-            background-color: #ffffff; 
-            padding: 0;
-            text-align: center;
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
+    .image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.5s;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
 
-        .image {
-            opacity: 1;
-            display: block;
-            width: 100%;
-            height: auto;
-            transition: .5s ease;
-            backface-visibility: hidden;
-        }
+    .hover-img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.5s;
+    }
 
-        .hover-img{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
+    .grid-item:hover .image {
+        opacity: 0.3;
+    }
 
-        .grid-item:hover .image {
-            opacity: 0.3;
-        }
+    .grid-item:hover .hover-img {
+        opacity: 1;
+    }
 
-        .grid-item:hover .hover-img {
-            opacity: 1;
-        }
+    .text {
+        background-color: #04AA6D;
+        color: white;
+        font-size: auto;
+        padding: 16px 32px;
+    }
+</style>
+<div class="content">
+    <center>
+        <h2>AI Sites</h2>
+    </center>
 
-        .text {
-            background-color: #04AA6D;
-            color: white;
-            font-size: auto;
-            padding: 16px 32px;
-        }
-    </style>
-</head>
-<body>
-    <div class="content">
-        <center> <h2>AI Sources</h2> </center>
-
-        <div class="grid-container">
-            <div class="grid-item">
-                <a href="https://www.khanacademy.org/"> <img src="{{ url_for('static', filename='khan_academy.png') }}" alt="Khan Academy" class="image"> </a>
-                <div class="hover-img">
-                    <a href="https://www.khanacademy.org/" style="text-decoration: none; color: inherit;"> <div class="text">Khan Academy</div> </a>
-                </div>
+    <div class="grid-container">
+        <div class="grid-item">
+            <a href="https://aivalley.ai/"> <img src="{{ url_for('static', filename='aivalley.png') }}" alt="AIValley"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://aivalley.ai/" style="text-decoration: none; color: inherit;">
+                    <div class="text">AIValley</div>
+                </a>
             </div>
-
-            <div class="grid-item">
-                <a href="https://www.w3schools.com/"> <img src="{{ url_for('static', filename='w3schools.png') }}" alt="W3Schools" class="image"> </a>
-                <div class="hover-img">
-                    <a href="https://www.w3schools.com/" style="text-decoration: none; color: inherit;"> <div class="text">W3Schools</div> </a>
-                </div>
-            </div>
-
-            <div class="grid-item">
-                <a href="https://huggingface.co/"> <img src="{{ url_for('static', filename='code.jpeg') }}" alt="Open Source Codes" class="image"> </a>
-                <div class="hover-img">
-                    <a href="https://huggingface.co/" style="text-decoration: none; color: inherit;"> <div class="text">Open Source Codes</div> </a>
-                </div>
-            </div>
-
-            <div class="grid-item">
-                <a href="https://www.wolframalpha.com/"> <img src="{{ url_for('static', filename='wolframalpha.png') }}" alt="Wolframalpha" class="image"> </a>
-                <div class="hover-img">
-                    <a href="https://www.wolframalpha.com/" style="text-decoration: none; color: inherit;"> <div class="text">Wolframalpha</div> </a>
-                </div>
-            </div>
-
-            <div class="grid-item">
-                <a href="https://quizlet.com/latest"> <img src="{{ url_for('static', filename='quizlet.png') }}" alt="Quizlet" class="image"> </a>
-                <div class="hover-img">
-                    <a href="https://quizlet.com/latest" style="text-decoration: none; color: inherit;"> <div class="text">Quizlet</div> </a>
-                </div>
-            </div>
-
-            <div class="grid-item">
-                <a href="https://stackoverflow.com/"> <img src="{{ url_for('static', filename='stackoverflow.png') }}" alt="stack overflow" class="image"> </a>
-                <div class="hover-img">
-                    <a href="https://stackoverflow.com/" style="text-decoration: none; color: inherit;"> <div class="text">Stack Overflow</div> </a>
-                </div>
-            </div>
-        
-            <div class="grid-item">
-                <a href="https://homeworkify.st/mirror-1/"> <img src="{{ url_for('static', filename='homeworkify.png') }}" alt="Homeworkify" class="image"> </a>
-                <div class="hover-img">
-                    <a href="https://homeworkify.st/mirror-1/" style="text-decoration: none; color: inherit;"> <div class="text">Homeworkify</div> </a>
-                </div>
-            </div>
-
-            <div class="grid-item">
-                <a href="https://knowt.com/"> <img src="{{ url_for('static', filename='knowt.jpeg') }}" alt="Knowt" class="image"> </a>
-                <div class="hover-img">
-                    <a href="https://knowt.com/" style="text-decoration: none; color: inherit;"> <div class="text">Knowt</div> </a>
-                </div>
-            </div>
-
-            <div class="grid-item">
-                <a href="https://www.studyfetch.com/"> <img src="{{ url_for('static', filename='fetch.png') }}" alt="Study Fetch" class="image"> </a>
-                <div class="hover-img">
-                    <a href="https://www.studyfetch.com/" style="text-decoration: none; color: inherit;"> <div class="text">Study Fetch</div> </a>
-                </div>
-            </div>
-
-            <div class="grid-item">
-                <a href="https://www.pdf2-anki.com/"> <img src="{{ url_for('static', filename='pdf2anki.png') }}" alt="PDF2Anki" class="image"> </a>
-                <div class="hover-img">
-                    <a href="https://www.pdf2-anki.com/" style="text-decoration: none; color: inherit;"> <div class="text">PDF2Anki</div> </a>
-                </div>
-            </div>
-
-            <div class="grid-item">
-                <a href="https://www.desmos.com/"> <img src="{{ url_for('static', filename='desmos.png') }}" alt="Desmos" class="image"> </a>
-                <div class="hover-img">
-                    <a href="https://www.desmos.com/" style="text-decoration: none; color: inherit;"> <div class="text">Desmos</div> </a>
-                </div>
-            </div>
-
-            <div class="grid-item">
-                <a href="https://www.grammarly.com/"> <img src="{{ url_for('static', filename='grammarly.png') }}" alt="Grammarly" class="image"> </a>
-                <div class="hover-img">
-                    <a href="https://www.grammarly.com/" style="text-decoration: none; color: inherit;"> <div class="text">Grammarly</div> </a>
-                </div>
-            </div>
-
-            <div class="grid-item">
-                <a href="https://chat.openai.com/"> <img src="{{ url_for('static', filename='chatgpt.png') }}" alt="ChatGPT" class="image"> </a>
-                <div class="hover-img">
-                    <a href="https://chat.openai.com/" style="text-decoration: none; color: inherit;"> <div class="text">ChatGPT</div> </a>
-                </div>
-            </div>
-
-            <div class="grid-item">
-                <a href="https://www.chegg.com/"> <img src="{{ url_for('static', filename='chegg.jpeg') }}" alt="Chegg" class="image"> </a>
-                <div class="hover-img">
-                    <a href="https://www.chegg.com/" style="text-decoration: none; color: inherit;"> <div class="text">Chegg</div> </a>
-                </div>
-            </div>
-
-            <div class="grid-item">
-                <a href="https://scholar.google.com/"> <img src="{{ url_for('static', filename='googlescholar.png') }}" alt="Google Scholar" class="image"> </a>
-                <div class="hover-img">
-                    <a href="https://scholar.google.com/" style="text-decoration: none; color: inherit;"> <div class="text">Google Scholar</div> </a>
-                </div>
-            </div>
-
-            <div class="grid-item">
-                <a href="https://www.coursehero.com/"> <img src="{{ url_for('static', filename='coursehero.png') }}" alt="Course Hero" class="image"> </a>
-                <div class="hover-img">
-                    <a href="https://www.coursehero.com/" style="text-decoration: none; color: inherit;"> <div class="text">Course Hero</div> </a>
-                </div>
-            </div>
-
-            <div class="grid-item">
-                <a href="https://www.numerade.com/"> <img src="{{ url_for('static', filename='numerade.jpeg') }}" alt="Numerade" class="image"> </a>
-                <div class="hover-img">
-                    <a href="https://www.numerade.com/" style="text-decoration: none; color: inherit;"> <div class="text">Numerade</div> </a>
-                </div>
-            </div>
-
-            <div class="grid-item">
-                <a href="https://brainly.com/"> <img src="{{ url_for('static', filename='brainly.png') }}" alt="Brainly" class="image"> </a>
-                <div class="hover-img">
-                    <a href="https://brainly.com/" style="text-decoration: none; color: inherit;"> <div class="text">Brainly</div> </a>
-                </div>
-            </div>
-
-        <!-- socratic, homework study, bartleby, quilt, zotero, notability, easy bib, stack exchange, 
-            Canva, Google Suite, Mathways, Symbolab, Quora, Claude, Google/Microsoft products, chatgpt, wikipedia
-            AI Slides, Geogebra, Google Geminini, Github, Leetcode, Geeks for Geeks, Brainly-->
-        {% endblock %}
         </div>
+
+        <div class="grid-item">
+            <a href="https://www.bartleby.com"> <img src="{{ url_for('static', filename='bartebly.png') }}"
+                    alt="Bartebly" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.bartleby.com" style="text-decoration: none; color: inherit;">
+                    <div class="text">Bartebly</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.useblackbox.io/"> <img src="{{ url_for('static', filename='blackbox.png') }}"
+                    alt="Blackbox" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.useblackbox.io/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Blackbox</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://brainly.com/"> <img src="{{ url_for('static', filename='brainly.png') }}" alt="Brainly"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://brainly.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Brainly</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.canva.com/"> <img src="{{ url_for('static', filename='canva.png') }}" alt="Canva"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.canva.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Canva</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://chat.openai.com/"> <img src="{{ url_for('static', filename='chatgpt.png') }}" alt="ChatGPT"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://chat.openai.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">ChatGPT</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.chegg.com/"> <img src="{{ url_for('static', filename='chegg.jpeg') }}" alt="Chegg"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.chegg.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Chegg</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.codecademy.com/"> <img src="{{ url_for('static', filename='codeacademy.png') }}"
+                    alt="Codeacademy" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.codecademy.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Codeacademy</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.coursehero.com/"> <img src="{{ url_for('static', filename='coursehero.png') }}"
+                    alt="Course Hero" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.coursehero.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Course Hero</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.cymath.com/"> <img src="{{ url_for('static', filename='cymath.png') }}" alt="Cymath"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.cymath.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Cymath</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.desmos.com/"> <img src="{{ url_for('static', filename='desmos.png') }}" alt="Desmos"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.desmos.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Desmos</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.docsity.com/en/usa/"> <img src="{{ url_for('static', filename='docsity.jpeg') }}"
+                    alt="Docsity" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.docsity.com/en/usa/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Docsity</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.easybib.com/"> <img src="{{ url_for('static', filename='easybib.png') }}" alt="EasyBib"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.easybib.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">EasyBib</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://exercism.org/"> <img src="{{ url_for('static', filename='exercism.png') }}" alt="Exercism"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://exercism.org/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Exercism</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://fastpedia.io/"> <img src="{{ url_for('static', filename='fastpedia.png') }}"
+                    alt="Fastpedia" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://fastpedia.io/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Fastpedia</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.studyfetch.com/"> <img src="{{ url_for('static', filename='fetch.png') }}"
+                    alt="Study Fetch" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.studyfetch.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Study Fetch</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.geeksforgeeks.org/"> <img src="{{ url_for('static', filename='geeksforgeeks.png') }}"
+                    alt="Geeks For Geeks" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.geeksforgeeks.org/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Geeks For Geeks</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://gemini.google.com/app"> <img src="{{ url_for('static', filename='gemini.jpeg') }}"
+                    alt="Gemini" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://gemini.google.com/app" style="text-decoration: none; color: inherit;">
+                    <div class="text">Gemini</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.geogebra.org/"> <img src="{{ url_for('static', filename='geogebra.png') }}"
+                    alt="Geogebra" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.geogebra.org/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Geogebra</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://github.com/"> <img src="{{ url_for('static', filename='github.png') }}" alt="Github"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://github.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Github</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://workspace.google.com/features/"> <img src="{{ url_for('static', filename='google.png') }}"
+                    alt="Google Apps" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://workspace.google.com/features/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Google Apps</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://scholar.google.com/"> <img src="{{ url_for('static', filename='googlescholar.png') }}"
+                    alt="Google Scholar" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://scholar.google.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Google Scholar</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.gradescope.com/"> <img src="{{ url_for('static', filename='gradescope.jpeg') }}"
+                    alt="Gradescope" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.gradescope.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Gradescope</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.grammarly.com/"> <img src="{{ url_for('static', filename='grammarly.png') }}"
+                    alt="Grammarly" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.grammarly.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Grammarly</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.gutenberg.org/"> <img src="{{ url_for('static', filename='gutenberg.png') }}"
+                    alt="Gutenberg" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.gutenberg.org/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Gutenberg</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://homeworkify.st/mirror-1/"> <img src="{{ url_for('static', filename='homeworkify.png') }}"
+                    alt="Homeworkify" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://homeworkify.st/mirror-1/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Homeworkify</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://huggingface.co/"> <img src="{{ url_for('static', filename='code.jpeg') }}"
+                    alt="Hugging Face" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://huggingface.co/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Hugging Face</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.insidr.ai/ai-tools-list/"> <img src="{{ url_for('static', filename='insidr.jpeg') }}"
+                    alt="Insidr" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.insidr.ai/ai-tools-list/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Insidr</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://kahoot.com/"> <img src="{{ url_for('static', filename='kahoot.png') }}" alt="Kahoot"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://kahoot.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Kahoot</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.khanacademy.org/"> <img src="{{ url_for('static', filename='khan_academy.png') }}"
+                    alt="Khan Academy" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.khanacademy.org/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Khan Academy</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://knowt.com/"> <img src="{{ url_for('static', filename='knowt.jpeg') }}" alt="Knowt"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://knowt.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Knowt</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://leetcode.com/"> <img src="{{ url_for('static', filename='leetcode.png') }}" alt="Leetcode"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://leetcode.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Leetcode</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://libgen.is/"> <img src="{{ url_for('static', filename='libgen.png') }}" alt="Libgen"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://libgen.is/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Libgen</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://madasmaths.com/"> <img src="{{ url_for('static', filename='madasmaths.jpeg') }}"
+                    alt="Madasmaths" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://madasmaths.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Madasmaths</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.mathway.com/Algebra"> <img src="{{ url_for('static', filename='mathway.png') }}"
+                    alt="Mathway" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.mathway.com/Algebra" style="text-decoration: none; color: inherit;">
+                    <div class="text">Mathway</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://support.microsoft.com/en-us/all-products"> <img
+                    src="{{ url_for('static', filename='microsoft.png') }}" alt="Microsoft Apps" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://support.microsoft.com/en-us/all-products"
+                    style="text-decoration: none; color: inherit;">
+                    <div class="text">Microsoft Apps</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://neetcode.io/"> <img src="{{ url_for('static', filename='neetcode.png') }}" alt="Neetcode"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://neetcode.io/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Neetcode</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://notability.com/"> <img src="{{ url_for('static', filename='notability.jpeg') }}"
+                    alt="Notability" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://notability.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Notability</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.notion.so/"> <img src="{{ url_for('static', filename='notion.png') }}" alt="Notion"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.notion.so/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Notion</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.numerade.com/"> <img src="{{ url_for('static', filename='numerade.jpeg') }}"
+                    alt="Numerade" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.numerade.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Numerade</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.pdf2-anki.com/"> <img src="{{ url_for('static', filename='pdf2anki.png') }}"
+                    alt="PDF2Anki" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.pdf2-anki.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">PDF2Anki</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.popularaitools.ai/"> <img src="{{ url_for('static', filename='popular.png') }}"
+                    alt="Popular AI Tools" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.popularaitools.ai/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Popular AI Tools</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.prepostseo.com/"> <img src="{{ url_for('static', filename='prepostseo.png') }}"
+                    alt="Prepostseo" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.prepostseo.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Prepostseo</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://quizlet.com/latest"> <img src="{{ url_for('static', filename='quizlet.png') }}"
+                    alt="Quizlet" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://quizlet.com/latest" style="text-decoration: none; color: inherit;">
+                    <div class="text">Quizlet</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://quizizz.com/?lng=en"> <img src="{{ url_for('static', filename='quizziz.png') }}"
+                    alt="Quizziz" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://quizizz.com/?lng=en" style="text-decoration: none; color: inherit;">
+                    <div class="text">Quizziz</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.quora.com/"> <img src="{{ url_for('static', filename='quora.png') }}" alt="Quora"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.quora.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Quora</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://sci-hub.se/"> <img src="{{ url_for('static', filename='scihub.jpeg') }}" alt="Sci-Hub"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://sci-hub.se/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Sci-Hub</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.slidesai.io/"> <img src="{{ url_for('static', filename='slidesai.png') }}"
+                    alt="SlidesAI" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.slidesai.io/" style="text-decoration: none; color: inherit;">
+                    <div class="text">SlidesAI</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://stackexchange.com/"> <img src="{{ url_for('static', filename='stackexchange.png') }}"
+                    alt="Study Exchange" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://stackexchange.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Study Exchange</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://stackoverflow.com/"> <img src="{{ url_for('static', filename='stackoverflow.png') }}"
+                    alt="stack overflow" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://stackoverflow.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Stack Overflow</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.studocu.com/en-us"> <img src="{{ url_for('static', filename='studocu.png') }}"
+                    alt="Studocu" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.studocu.com/en-us" style="text-decoration: none; color: inherit;">
+                    <div class="text">Studocu</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://homework.study.com/"> <img src="{{ url_for('static', filename='study.png') }}"
+                    alt="Homework Study" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://homework.study.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Homework Study</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.symbolab.com/"> <img src="{{ url_for('static', filename='symbolab.png') }}"
+                    alt="Symbolab" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.symbolab.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Symbolab</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://theresanaiforthat.com/"> <img src="{{ url_for('static', filename='thereai.jpeg') }}"
+                    alt="Theres An AI for That" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://theresanaiforthat.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Theres An AI for That</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://tinywow.com/"> <img src="{{ url_for('static', filename='tinywow.jpeg') }}" alt="Tiny Wow"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://tinywow.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Tiny Wow</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.w3schools.com/"> <img src="{{ url_for('static', filename='w3schools.png') }}"
+                    alt="W3Schools" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.w3schools.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">W3Schools</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.wikipedia.org/"> <img src="{{ url_for('static', filename='wikipedia.png') }}"
+                    alt="Wikipedia" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.wikipedia.org/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Wikipedia</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.wolframalpha.com/"> <img src="{{ url_for('static', filename='wolframalpha.png') }}"
+                    alt="Wolframalpha" class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.wolframalpha.com/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Wolframalpha</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://z-lib.io/"> <img src="{{ url_for('static', filename='zlib.jpeg') }}" alt="Z-lib"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://z-lib.io/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Z-lib</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-item">
+            <a href="https://www.zotero.org/"> <img src="{{ url_for('static', filename='zotero.png') }}" alt="Zotero"
+                    class="image"> </a>
+            <div class="hover-img">
+                <a href="https://www.zotero.org/" style="text-decoration: none; color: inherit;">
+                    <div class="text">Zotero</div>
+                </a>
+            </div>
+        </div>
+
+        {% endblock %}
     </div>
-</body>
-</html>
+</div>
