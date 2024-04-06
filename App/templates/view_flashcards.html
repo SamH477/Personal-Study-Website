@@ -1,6 +1,6 @@
-{% extends "video_upload.html" %}
+{% extends "my_flashcards.html" %}
 
-{% block title %}Video Processing{% endblock %}
+{% block title %}View Flashcards{% endblock %}
 
 {% block content %}
 <!DOCTYPE html>
@@ -53,29 +53,9 @@
         display: flex;
     }
 
-    .save-button button {
-        color: white;
-        background-color: rgba(0,75,152,255); /* Change the background color */
-        padding: 10px 20px;
-        font-size: 16px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        display: block; /* Make the button a block-level element */
-        margin: 0 auto; /* Center the button horizontally */
-        margin-top: 20px;
-    }
-
-    .save-button button:hover {
-        color: #ffd700;
-    }
     </style>
 </head>
 <body>
-    <div class="save-button">
-        <button onclick="saveFlashcards()">Save Flashcards</button>
-    </div>
     {% for t in terms %}
         {% set term_definition = t.split(':') %}
         <div class="flashcard" onclick="toggleFlip(this)">
@@ -84,31 +64,6 @@
         </div>
     {% endfor %}
     <script>
-        function saveFlashcards() {
-            var terms_saved = {{ terms|tojson }};
-    var encodedTerms = encodeURIComponent(JSON.stringify(terms_saved));
-    var link = "/view_flashcards?data=" + encodedTerms;
-    alert("Flashcards saved!");
-    
-    var form = document.createElement('form');
-    form.method = 'POST';  // Use POST method to send data
-    form.action = '/save_flashcards';  // Flask route to handle the form submission
-    
-    // Create an input element to hold the link
-    var input = document.createElement('input');
-    input.type = 'hidden';  // Hide the input field
-    input.name = 'link';  // Name of the input field
-    input.value = link;  // Value to be sent
-    
-    // Append the input field to the form
-    form.appendChild(input);
-    
-    // Append the form to the document body
-    document.body.appendChild(form);
-    
-    // Submit the form
-    form.submit();
-        }
 
         function toggleFlip(element) {
             if (!event.target.closest('.term') && !event.target.closest('.definition')) {

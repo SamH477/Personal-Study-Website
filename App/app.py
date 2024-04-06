@@ -1,16 +1,19 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify, redirect, url_for, session
 from openai import OpenAI
-from api_config.api_config import OPENAI_API_KEY
+from api_config.api_config import OPENAI_API_KEY, key
 from PyPDF2 import PdfReader
 import re
 import os
 import moviepy.editor as mp
 import speech_recognition as sr
+from urllib.parse import unquote
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 # Create a Flask app
 app = Flask(__name__)
+
+app.secret_key = key
 
 # Define a route for the homepage
 @app.route('/')
@@ -57,15 +60,15 @@ def process_pdf():
 
     response = response.replace("', role='assistant', function_call=None, tool_calls=None)", ' ')
 
-    response = response.replace("\\n", '   ')
+    response = response.replace("\\n", '*')
 
     response = response.replace("ChatCompletionMessage(content='", ' ')
 
-    terms_list = response.split(sep = "  ")
+    terms_list = response.split(sep = "*")
 
     del terms_list[-1]
 
-    print(response)
+    # print(response)
 
     return render_template('process_pdf.html', text=text, terms=terms_list)
 
@@ -110,31 +113,43 @@ def process_video():
 
     response = response.replace("', role='assistant', function_call=None, tool_calls=None)", ' ')
 
-    response = response.replace("\\n", '  ')
+    response = response.replace("\\n", '*')
 
     response = response.replace("ChatCompletionMessage(content='", ' ')
 
-    terms_list = response.split(sep = "   ")
+    terms_list = response.split(sep = "*")
 
-    # del terms_list[-1]
+    del terms_list[-1]
 
-    print(text)
+    # print(text)
 
-    print(response)
+    # print(response)
 
     return render_template('process_video.html', text=text, terms=terms_list)
     
     # Remove the temporary video file
     # os.remove("temp_video.mp4")
 
-# Define a route so users can see their flashcards
+@app.route('/save_flashcards', methods=["POST"])
+def save_flashcards():
+    link = request.form.get('link')
+    name = request.form.get('name')
+    session['link'] = link
+    session['name'] = name
+    return redirect(url_for('my_flashcards'))
+
 @app.route('/my_flashcards')
 def my_flashcards():
-    return render_template('my_flashcards.html')
+    link = session.get('link')
+    name = session.get('name')
+    return render_template('my_flashcards.html', url=link, name=name)
 
 @app.route('/view_flashcards')
 def view_flashcards():
-    return render_template('view_flashcards.html')
+    terms = request.args.get('data')  # Get the terms from the URL query parameters
+    decoded_terms = unquote(terms)  # Decode the encoded terms
+    terms_list = eval(decoded_terms)  # Convert the decoded string to a list
+    return render_template('view_flashcards.html', terms=terms_list)
 
 # Run the Flask app
 if __name__ == '__main__':

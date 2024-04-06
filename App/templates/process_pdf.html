@@ -3,7 +3,6 @@
 {% block title %}PDF Processing{% endblock %}
 
 {% block content %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,97 +10,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flashcards</title>
     <style>
-        .flashcard-container {
-            height: 700px; /* Adjust the height as needed */
-            width: 600px;
-            overflow: auto; /* Add a scrollbar when flashcards overflow */
-            display: flex;
-            flex-direction: column; /* Display flashcards vertically */
-            justify-content: center;
-            align-items: center;
-            margin-top: 50px; /* Adjust the margin as needed */
-        }
+    .flashcard {
+        width: 300px; /* Adjust the width of the flashcard */
+        height: 150px; /* Adjust the height of the flashcard */
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px; /* Adjust padding as needed */
+        margin: 25px auto; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        font-weight: bold;
+        display: flex; /* Use flexbox for centering */
+        flex-direction: column; /* Stack term and definition vertically */
+        justify-content: center; /* Center vertically */
+        align-items: center; /* Center horizontally */
+        text-align: center; /* Center text */
+    }
 
-        .flashcard {
-            width: 300px;
-            height: 200px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            padding: 50px;
-            margin: 10px auto; 
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-            font-weight: bold;
-        }
+    .flashcard:hover {
+        transform: scale(1.05);
+    }
 
-        .flashcard:hover {
-            transform: scale(1.05);
-        }
+    .flashcard p {
+        margin: 0; /* Remove default margin */
+    }
 
-        .flashcard .term,
-        .flashcard .definition {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 50%;
-            text-align: center;
-            font-size: 20px;
-        }
+    .flashcard .definition {
+        display: none;
+        font-size: 18px;
+    }
 
-        .flashcard .definition {
-            display: none;
-        }
+    .flashcard .term {
+        font-size: 24px; /* Adjust the font size of the term */
+    }
 
-        .flashcard.flip .term {
-            display: none;
-        }
+    .flashcard.flip .term {
+        display: none;
+    }
 
-        .flashcard.flip .definition {
-            display: flex;
-        }
-        .save-button button {
-            color: white;
-            background-color: rgba(0,75,152,255); /* Change the background color */
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .save-button button:hover {
-            color: #ffd700;
-        }
+    .flashcard.flip .definition {
+        display: flex;
+    }
+
+    .save-button button {
+        color: white;
+        background-color: rgba(0,75,152,255); /* Change the background color */
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: block; /* Make the button a block-level element */
+        margin: 0 auto; /* Center the button horizontally */
+        margin-top: 20px;
+    }
+
+    .save-button button:hover {
+        color: #ffd700;
+    }
     </style>
 </head>
 <body>
     <div class="save-button">
         <button onclick="saveFlashcards()">Save Flashcards</button>
     </div>
-    <div class="flashcard-container">
-        {% for t in terms %}
-            {% set term_definition = t.split(':') %}
-            <div class="flashcard" onclick="this.classList.toggle('flip')">
-                <div class="content term">
-                    <p>{{ term_definition[0] }}</p>
-                </div>
-                <div class="content definition">
-                    <p>{{ term_definition[1] }}</p>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
+    {% for t in terms %}
+        {% set term_definition = t.split(':') %}
+        <div class="flashcard" onclick="toggleFlip(this)">
+            <p class="term" contenteditable="true">{{ term_definition[0] }}</p>
+            <p class="definition" contenteditable="true">{{ term_definition[1] }}</p>
+        </div>
+    {% endfor %}
     <script>
-        function saveFlashcards() {
-            // Logic to save flashcards and generate link
-            // Example:
-            var flashcardsData = "flashcard1:definition1|flashcard2:definition2|flashcard3:definition3"; // Example flashcard data
-            var link = "https://example.com/my_flashcards?data=" + encodeURIComponent(flashcardsData);
-            alert("Flashcards saved! Link: " + link);
+function saveFlashcards() {
+    // Prompt the user for a name
+    var name = prompt("Please enter your name:");
+    if (name === null || name === "") {
+        alert("Name cannot be empty. Flashcards not saved.");
+        return; // Exit the function if the user cancels or leaves the name empty
+    }
+
+    var terms_saved = {{ terms|tojson }};
+    var encodedTerms = encodeURIComponent(JSON.stringify(terms_saved));
+    var link = "/view_flashcards?data=" + encodedTerms;
+
+    var form = document.createElement('form');
+    form.method = 'POST';  // Use POST method to send data
+    form.action = '/save_flashcards';  // Flask route to handle the form submission
+
+    // Create an input element to hold the name
+    var nameInput = document.createElement('input');
+    nameInput.type = 'hidden';  // Hide the input field
+    nameInput.name = 'name';  // Name of the input field for name
+    nameInput.value = name;  // Value of the name input field
+    form.appendChild(nameInput);
+
+    // Create an input element to hold the link
+    var linkInput = document.createElement('input');
+    linkInput.type = 'hidden';  // Hide the input field
+    linkInput.name = 'link';  // Name of the input field for link
+    linkInput.value = link;  // Value of the link input field
+    form.appendChild(linkInput);
+
+    // Append the form to the document body
+    document.body.appendChild(form);
+
+    // Submit the form
+    form.submit();
+}
+
+
+        function toggleFlip(element) {
+            if (!event.target.closest('.term') && !event.target.closest('.definition')) {
+                element.classList.toggle('flip');
+            }
         }
-        </script>
+    </script>
 </body>
 </html>
-
 {% endblock %}

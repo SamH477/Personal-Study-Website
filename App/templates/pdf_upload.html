@@ -3,66 +3,124 @@
 {% block title %}PDF Upload{% endblock %}
 
 {% block content %}
-<div class="upload-container">
-    <h2>Upload a PDF file to get started!</h2>
-    <form action="/upload" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
-        <input type="file" id="fileInput" name="file" accept=".pdf">
-        <!-- Replace the button with a div that will display the loading spinner -->
-        <div id="uploadButtonContainer">
-            <button type="submit" id="uploadButton">Upload</button>
-            <div id="loadingSpinner" class="spinner" style="display: none;"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* Use Arial font */
+            background-color: #f9f9f9; /* Light background color */
+        }
+
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Set container height to full viewport height */
+        }
+
+        .upload-container {
+            width: 100%;
+            text-align: center;
+        }
+
+        #errorContainer {
+            background-color: #ffebee; /* Light red background color */
+            border: 1px solid #ffcdd2; /* Light red border */
+            padding: 10px; /* Add padding */
+            margin-top: 10px; /* Add some space between the upload container and the error message */
+        }
+
+        #errorMessage {
+            color: #d32f2f; /* Red text color */
+            margin: 0; /* Remove default margin */
+        }
+
+        /* CSS for the spinner */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #333;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite; /* Apply animation */
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); } /* Rotate the spinner */
+        }
+
+        /* Button styling */
+        #uploadButton {
+            background-color: #4CAF50; /* Green background color */
+            color: white; /* White text color */
+            padding: 15px 30px; /* Increased padding */
+            border: none; /* Remove border */
+            border-radius: 8px; /* Rounded corners */
+            cursor: pointer; /* Add cursor pointer */
+            transition: background-color 0.3s ease; /* Add transition effect */
+            font-size: 16px; /* Increase font size */
+            margin-top: 30px;
+        }
+
+        #fileInput {
+            background-color: rgb(236, 49, 49); /* Blue background color */
+            color: white; /* White text color */
+            padding: 15px 30px; /* Increased padding */
+            border: none; /* Remove border */
+            border-radius: 8px; /* Rounded corners */
+            cursor: pointer; /* Add cursor pointer */
+            transition: background-color 0.3s ease; /* Add transition effect */
+            font-size: 16px; /* Increase font size */
+        }
+
+        /* Hover effect for buttons */
+
+    </style>
+</head>
+<body>
+    <div class="upload-container">
+        <div class="center-content">
+            <h2>Upload a PDF file to get started!</h2>
+            <form action="/upload" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+                <input type="file" id="fileInput" name="file" accept=".pdf">
+                <!-- Replace the button with a div that will display the loading spinner -->
+                <div id="uploadButtonContainer">
+                    <button type="submit" id="uploadButton">Upload</button>
+                    <div id="loadingSpinner" class="spinner" style="display: none;"></div>
+                </div>
+            </form>
         </div>
-    </form>
-</div>
-<div id="errorContainer" style="display: none;">
-    <p id="errorMessage" style="color: red;">Error: Please Select a PDF File!</p>
-</div>
+    </div>
+    <div id="errorContainer" style="display: none;">
+        <p id="errorMessage" style="color: red;">Error: Please Select a PDF File!</p>
+    </div>
 
-<script>
-function validateForm() {
-    var fileInput = document.getElementById('fileInput');
-    var errorContainer = document.getElementById('errorContainer');
-    var errorMessage = document.getElementById('errorMessage');
-    
-    if (fileInput.files.length === 0) {
-        errorContainer.style.display = 'block';
-        errorMessage.innerText = 'Error: Please Select a PDF File!';
-        return false;
-    }
-    // Show loading spinner and hide upload button when form is submitted
-    var uploadButtonContainer = document.getElementById('uploadButtonContainer');
-    var uploadButton = document.getElementById('uploadButton');
-    var loadingSpinner = document.getElementById('loadingSpinner');
-    uploadButton.style.display = 'none';
-    loadingSpinner.style.display = 'block';
-    return true;
-}
-</script>
-<style>
-#errorContainer {
-    background-color: #ffebee; /* Light red background color */
-    border: 1px solid #ffcdd2; /* Light red border */
-    padding: 10px; /* Add padding */
-    margin-top: 10px; /* Add some space between the upload container and the error message */
-}
+    <script>
+        function validateForm() {
+            var fileInput = document.getElementById('fileInput');
+            var errorContainer = document.getElementById('errorContainer');
+            var errorMessage = document.getElementById('errorMessage');
+            
+            if (fileInput.files.length === 0) {
+                errorContainer.style.display = 'block';
+                errorMessage.innerText = 'Error: Please Select a PDF File!';
+                return false;
+            }
+            // Show loading spinner and hide upload button when form is submitted
+            var uploadButtonContainer = document.getElementById('uploadButtonContainer');
+            var uploadButton = document.getElementById('uploadButton');
+            var loadingSpinner = document.getElementById('loadingSpinner');
+            uploadButton.style.display = 'none';
+            loadingSpinner.style.display = 'block';
+            return true;
+        }
+    </script>
+</body>
+</html>
 
-#errorMessage {
-    color: #d32f2f; /* Red text color */
-    margin: 0; /* Remove default margin */
-}
-
-/* CSS for the spinner */
-.spinner {
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #333;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite; /* Apply animation */
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); } /* Rotate the spinner */
-}
-</style>
 {% endblock %}
