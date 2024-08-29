@@ -1,0 +1,5 @@
+Flask
+openai
+PyPDF2
+moviepy
+speechRecognition
