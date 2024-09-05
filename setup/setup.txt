@@ -1,5 +1,0 @@
-To download all necessary packages:
-
-Need to be in setup folder:
-pip install -r ./requirements.txt
-
